@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
         email: req.body.email
     })
 
-    dev.save().then(dev => res.send(dev));
+    dev.save().then(dev => res.json(dev));
 })
 
 router.put('/:id', (req, res) => {
@@ -37,7 +37,7 @@ router.put('/:id', (req, res) => {
             developer.name = req.body.name || developer.name;
             developer.email = req.body.email || developer.email;
 
-            developer.save().then(dev => res.send(dev));
+            developer.save().then(dev => res.json(dev));
         })
         .catch(err => res.status(404).json({}))
 })
