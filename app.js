@@ -4,6 +4,7 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+let developersRouter = require("./routes/developers");
 
 var app = express();
 
@@ -23,6 +24,7 @@ mongoose
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/api/developers", developersRouter);
 
 const port = process.env.PORT || 5000;
 
