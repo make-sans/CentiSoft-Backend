@@ -36,4 +36,16 @@ router.post("/", (req, res) => {
   new Customer(customerFields).save().then(customer => res.json(customer));
 });
 
+//delete a customer by id
+router.delete("/:id", (req, res) => {
+  Customer.findById(req.params.id)
+    .then(customer => {
+      //Delete
+      customer.remove().then(() => res.json({ success: true }));
+    })
+    .catch(err =>
+      res.status(404).json({ nocustomerfound: "No customer found" })
+    );
+});
+
 module.exports = router;
