@@ -2,8 +2,7 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 const mongoose = require("mongoose");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+
 let developersRouter = require("./routes/developers");
 let taskRoute = require("./routes/task");
 let projectsRoute = require("./routes/projects");
@@ -25,8 +24,6 @@ mongoose
   .then(() => console.log("MongoDb connected"))
   .catch(err => console.log(err));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/api/developers", developersRouter);
 app.use("/api/task", taskRoute);
 app.use("/api/projects", projectsRoute);
