@@ -95,4 +95,34 @@ router.delete("/:proj_id/tasks/:task_id", (req, res) => {
       res.status(404).json({ tasknotfound: "Task not found with that id" });
     });
 });
+
+router.put('/:proj_id/tasks/:task_id', (req, res) => {
+  Task.findById(req.params.task_id)
+    .then(task => {
+      if (task.projectId.toString() !== req.params.proj_id)
+        return res.status(404).json({ success: false })
+      
+      task.name = req.body.name || task.name;
+      task.description = req.body.description || task.description;
+      task.created = req.body.created || task.created;
+      task.duration = req.body.duration || task.duration;
+      task.projectId = req.body.projectId || task.projectId;
+      task.developerId = req.body.developerId || task.developerId;
+
+      task.save()
+        .then(task => {
+          res.json(task)
+        })
+        .catch(err => {
+          res.status(500).json({ success: false })
+          console.log(err)
+        })
+
+    })
+    .catch(err => {
+      res.status(404).json({ tasknotfound: "Task not found with that id" })
+      console.log(err)
+    })
+})
+
 module.exports = router;
