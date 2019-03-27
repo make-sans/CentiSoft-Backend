@@ -7,6 +7,7 @@ var usersRouter = require("./routes/users");
 let developersRouter = require("./routes/developers");
 let taskRoute = require("./routes/task");
 let projectsRoute = require("./routes/projects");
+let customersRoute = require("./routes/customers");
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use("/users", usersRouter);
 app.use("/api/developers", developersRouter);
 app.use("/api/task", taskRoute);
 app.use("/api/projects", projectsRoute);
+app.use("/api/customers", customersRoute);
 
 const port = process.env.PORT || 5000;
 
