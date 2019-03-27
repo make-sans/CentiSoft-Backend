@@ -3,10 +3,6 @@ let router = express.Router();
 
 const Developer = require('../developers/Developer');
 
-/*
- * /api/developers/{id} (delete)
- */
-
 router.get('/', (req, res) => {
     Developer.find()
         .then((developers) => {
