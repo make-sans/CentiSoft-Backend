@@ -25,8 +25,8 @@ mongoose
   .catch(err => console.log(err));
 
 app.use("/api/developers", developersRouter);
-app.use("/api/task", taskRoute);
-app.use("/api/projects", projectsRoute);
+app.use("/api/projects", taskRoute);
+app.use("/api/customers", projectsRoute);
 app.use("/api/customers", customersRoute);
 
 const port = process.env.PORT || 5000;
