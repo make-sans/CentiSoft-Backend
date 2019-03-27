@@ -9,7 +9,7 @@ module.exports = function validateTaskFields(data) {
   data.description = !isEmpty(data.description) ? data.description : "";
   data.created = !isEmpty(data.created) ? data.created : "";
   data.duration = !isEmpty(data.duration) ? data.duration : "";
-  data.developer = !isEmpty(data.developer) ? data.developer : "";
+  data.developerId = !isEmpty(data.developerId) ? data.developerId : "";
 
   if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
     errors.name = "Name must be between 2 and 30 characters!";
@@ -31,8 +31,8 @@ module.exports = function validateTaskFields(data) {
   if (Validator.isEmpty(data.duration)) {
     errors.duration = "Duration field is required";
   }
-  if (Validator.isEmpty(data.developer)) {
-    errors.developer = "Developer field is required";
+  if (Validator.isEmpty(data.developerId)) {
+    errors.developerId = "Developer field is required";
   }
 
   return {

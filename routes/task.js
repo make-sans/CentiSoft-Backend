@@ -46,10 +46,12 @@ router.post("/:proj_id/tasks", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  console.log(req.params.proj_id);
+  console.log(typeof req.params.proj_id);
 
   Project.findById(req.params.proj_id)
     .then(project => {
-      Developer.findById(req.body.developer)
+      Developer.findById(req.body.developerId.toString())
         .then(developer => {
           const newTask = new Task({
             name: req.body.name,
@@ -69,9 +71,11 @@ router.post("/:proj_id/tasks", (req, res) => {
         });
     })
     .catch(err => {
+      console.log(err);
+
       return res
         .status(404)
-        .json({ projectnotfound: "No project found with that id", err });
+        .json({ projectnotfound: "No project found with that id" });
     });
 });
 //delete a task
