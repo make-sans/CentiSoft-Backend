@@ -4,10 +4,6 @@ let router = express.Router();
 const Developer = require('../developers/Developer');
 
 /*
- * /api/developers (get)
- * /api/developers/{id} (get)
- * /api/developers (post)
- * /api/developers/{id} (put)
  * /api/developers/{id} (delete)
  */
 
@@ -16,6 +12,12 @@ router.get('/', (req, res) => {
         .then((developers) => {
             res.json(developers)
         })
+})
+
+router.get('/:id', (req, res) => {
+    Developer.findById(req.params.id)
+        .then(developer => res.json(developer))
+        .catch(err => res.status(404).json({}))
 })
 
 router.post('/', (req, res) => {
@@ -27,6 +29,26 @@ router.post('/', (req, res) => {
     })
 
     dev.save().then(dev => res.send(dev));
+})
+
+router.put('/:id', (req, res) => {
+    Developer.findById(req.params.id)
+        .then(developer => {
+            developer.name = req.body.name || developer.name;
+            developer.email = req.body.email || developer.email;
+
+            developer.save().then(dev => res.send(dev));
+        })
+        .catch(err => res.status(404).json({}))
+})
+
+router.delete('/:id', (req, res) => {
+    Developer.findById(req.params.id)
+        .then(developer => {
+            developer.remove()
+                .then(() => res.json({success: true}))
+        })
+        .catch(err => res.status(404).json({}))
 })
 
 module.exports = router;
