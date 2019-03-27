@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 const mongoose = require("mongoose");
+const cors = require('cors');
 
 let developersRouter = require("./routes/developers");
 let taskRoute = require("./routes/task");
@@ -10,6 +11,7 @@ let customersRoute = require("./routes/customers");
 
 var app = express();
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
